@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Crear Nota</title>
+</head>
+<body>
+    <h1>Crear Nota</h1>
+    <form action="{% url 'notas:crear' %}" method="post">
+        {% csrf_token %}
+        <label for="question">Nota:</label>
+        <input type="text" id="question" name="question">
+        <input type="submit" value="Crear">
+    </form>
+</html>
