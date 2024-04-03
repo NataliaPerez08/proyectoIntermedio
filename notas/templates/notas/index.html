@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Notas</title>
+</head>
+<body>
+    <h1>Notas</h1>
+    {% if latest_question_list %}
+        <ul>
+        {% for question in latest_question_list %}
+            <li><a href="/polls/{{ question.id }}/">{{ question.question_text }}</a></li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No hay notas disponibles.</p>
+    {% endif %}
+</body>
+
+</html>
+

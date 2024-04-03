@@ -6,9 +6,7 @@ class Nota(models.Model):
     contenido = models.TextField()
     color = models.CharField(max_length=20)
     autor = models.CharField(max_length=100 )
-    fecha_creacion = models.DateTimeField('fecha de creación')
     fecha_modificacion = models.DateTimeField('fecha de modificación')
-    fecha_publicacion = models.DateTimeField('fecha de publicación')
     # Podriamos agregar un campo de imagen
     # imagen = models.ImageField(upload_to='notas/imagenes/')
     def __str__(self):
