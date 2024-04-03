@@ -5,10 +5,10 @@
 </head>
 <body>
     <h1>Notas</h1>
-    {% if latest_question_list %}
+    {% if notas_recientes %}
         <ul>
-        {% for question in latest_question_list %}
-            <li><a href="/notas/{{ question.id }}/">{{ question.question_text }}</a></li>
+        {% for notas in notas_recientes %}
+            <li><a href="/notas/{{ notas.id }}/">{{ notas }}</a></li>
         {% endfor %}
         </ul>
     {% else %}

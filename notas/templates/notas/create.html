@@ -7,8 +7,19 @@
     <h1>Crear Nota</h1>
     <form action="{% url 'notas:crear' %}" method="post">
         {% csrf_token %}
-        <label for="question">Nota:</label>
-        <input type="text" id="question" name="question">
+        <label for="titulo">Titulo:</label>
+        <input type="text" id="titulo" name="titulo">
+
+        <label for="contenido">Contenido:</label>
+        <input type="text" id="contenido" name="contenido">
+
+        <!-- Seleccionar color -->
+        <label for="color">Color:</label>
+        <input type="color" id="color" name="color">
+
+        <!-- hidden autor -->
+        <input type="hidden" id="autor" name="autor" value="autor">
+
         <input type="submit" value="Crear">
     </form>
 </html>
