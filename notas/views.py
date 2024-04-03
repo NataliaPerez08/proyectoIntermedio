@@ -14,12 +14,12 @@ def index(request):
     }
     return HttpResponse(template.render(contexto, request))
 
-def detail(request, question_id):
+def detail(request, id_nota):
     try:
-        question = Nota.objects.get(pk=question_id)
+        nota = Nota.objects.get(pk=id_nota)
     except Nota.DoesNotExist:
-        raise Http404("Question does not exist")
-    return render(request, "notas/detail.html", {"question": question})
+        raise Http404("La nota no existe")
+    return render(request, "notas/detail.html", {"nota": nota})
 
 def form_crear(request):
     # Si el formulario fue enviado
