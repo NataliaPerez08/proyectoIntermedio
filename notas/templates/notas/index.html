@@ -8,12 +8,23 @@
     {% if notas_recientes %}
         <ul>
         {% for notas in notas_recientes %}
-            <li><a href="/notas/{{ notas.id }}/">{{ notas }}</a></li>
+            <!-- Div de la nota  y direccion de detalles -->
+            <li>
+                <div style="background-color: {{ notas.color }}; padding: 2px; margin: 2px;">
+                    <h2><a href="/notas/{{ notas.id }}/">{{ notas.titulo }}</a></h2>
+                    <p>{{ notas.contenido }}</p>
+                    <p><strong>Autor:</strong> {{ notas.autor }}</p>
+                </div>
+            </li>
+
         {% endfor %}
         </ul>
     {% else %}
         <p>No hay notas disponibles.</p>
     {% endif %}
+
+    <!-- Botón para crear una nueva nota -->
+    <a href="/notas/crear/">Crear una nueva nota</a>
 </body>
 
 </html>

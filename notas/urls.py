@@ -8,4 +8,6 @@ urlpatterns = [
     path("<int:id_nota>/", views.detail, name="detail"),
     # ex: /notas/crear/
     path("crear/", views.form_crear, name="crear"),
+    # ex: /notas/5/editar/
+    path("<int:id_nota>/editar/", views.form_editar, name="editar"),
 ]

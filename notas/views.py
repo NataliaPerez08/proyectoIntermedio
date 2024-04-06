@@ -39,3 +39,19 @@ def form_crear(request):
         template = loader.get_template("notas/create.html")
         # Renderizo el template
         return HttpResponse(template.render({}, request))
+
+def form_editar(request, id_nota):
+    try:
+        nota = Nota.objects.get(pk=id_nota)
+    except Nota.DoesNotExist:
+        raise Http404("La nota no existe")
+    if request.method == "POST":
+        nota.titulo = request.POST["titulo"]
+        nota.contenido = request.POST["contenido"]
+        nota.color = request.POST["color"]
+        nota.autor = request.POST["autor"]
+        nota.fecha_modificacion = datetime.datetime.now()
+        nota.save()
+        return HttpResponseRedirect(reverse("notas:index"))
+    else:
+        return render(request, "notas/edit.html", {"nota": nota})
