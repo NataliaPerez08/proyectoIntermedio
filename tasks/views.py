@@ -44,7 +44,7 @@ def login_user(request):
         if user is not None:
             login(request=request, user=user)
             template = loader.get_template("notas/index.html")
-            return HttpResponse(template.render({}, request))
+            return render(request, 'notas/index.html')
         else:
             return HttpResponse('Usuario o contraseña incorrectos')
 
