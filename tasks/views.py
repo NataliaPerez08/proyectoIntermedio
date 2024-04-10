@@ -1,8 +1,9 @@
-from django.shortcuts import render
-from django.contrib.auth.forms import UserCreationForm
+from django.shortcuts import redirect, render
+from django.template import loader
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
-from django.http import HttpResponse
-
+from django.http import HttpResponse, HttpResponseRedirect
+from django.contrib.auth import authenticate,logout,login
 
 # Create your views here.
 
@@ -23,10 +24,34 @@ def signup(request):
                     #print("Obteniendo datos")
                     user=User.objects.create_user(username=request.POST['username'],password=request.POST['password1'])
                     user.save()
-                    return HttpResponse('Usuario creado satisfactoriamente')
+                    # Rederigir a la pagina de las notas
+                    return render(request, 'notas/index.html')
                 except:
                     return HttpResponse('El usuario ya existe')
             return HttpResponse('las password no coinciden')
+        
+def login_user(request):
+    if(request.method=='GET'):
+        return render(request, 'login.html', {
+            'form': AuthenticationForm
+        })
+    if(request.method=='POST'):
+        username = request.POST.get('username', '') 
+        password = request.POST['password']
+        if(request.POST['username']=='' or request.POST['password']==''):
+            return HttpResponse('Usuario o contraseña vacios')
+        user = authenticate(username=username, password=password)
+        if user is not None:
+            login(request=request, user=user)
+            template = loader.get_template("notas/index.html")
+            return HttpResponse(template.render({}, request))
+        else:
+            return HttpResponse('Usuario o contraseña incorrectos')
 
+
+def logout_user(request):
+    logout(request)
+    # Redirigir a la pagina de inicio
+    return redirect('home')
         
         
