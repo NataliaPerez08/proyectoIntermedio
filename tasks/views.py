@@ -1,8 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from django.http import HttpResponse
-
+from django.contrib.auth import login
+from django.contrib.auth import logout
 
 # Create your views here.
 
@@ -19,14 +19,23 @@ def signup(request):
             if(request.POST['password1']==request.POST['password2']):
                 #register user
                 try:
-                    #print(request.POST)
-                    #print("Obteniendo datos")
                     user=User.objects.create_user(username=request.POST['username'],password=request.POST['password1'])
                     user.save()
-                    return HttpResponse('Usuario creado satisfactoriamente')
+                    login(request, user) 
+                    return redirect('tablero')
                 except:
-                    return HttpResponse('El usuario ya existe')
-            return HttpResponse('las password no coinciden')
+                     return render(request, 'signup.html', {
+                        'form': UserCreationForm,
+                        "error": 'el nombre de usuario ya existe'
+                    })
+                    
+            return render(request, 'signup.html', {
+                        'form': UserCreationForm,
+                        "error": 'Las contraseñas no coinciden'
+                    })
+        
+def tablero(request):
+        return render(request, 'tablero.html')
 
         
         

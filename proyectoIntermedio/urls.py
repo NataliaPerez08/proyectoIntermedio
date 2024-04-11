@@ -22,5 +22,6 @@ urlpatterns = [
     path('notas/', include('notas.urls')),
     path('admin/', admin.site.urls),
     path('',views.home, name="home"),
-    path('signup/',views.signup, name="signup")
+    path('signup/',views.signup, name="signup"),
+    path('tablero/',views.tablero, name="tablero")
 ]
