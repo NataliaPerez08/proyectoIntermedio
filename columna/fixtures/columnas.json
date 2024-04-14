@@ -1,0 +1,23 @@
+[
+    {
+        "model": "columna.columna",
+        "pk": 1,
+        "fields" : {
+            "titulo": "Por hacer"
+        }
+    },
+    {
+        "model": "columna.columna",
+        "pk": 2,
+        "fields" : {
+            "titulo": "En progreso"
+        }
+    },
+    {
+        "model": "columna.columna",
+        "pk": 3,
+        "fields" : {
+            "titulo": "Terminadas"
+        }
+    }
+]
