@@ -1,9 +1,8 @@
-from django.shortcuts import redirect, render
-from django.template import loader
+from django.shortcuts import render,redirect
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
-from django.http import HttpResponse, HttpResponseRedirect
-from django.contrib.auth import authenticate,logout,login
+from django.contrib.auth import login
+from django.contrib.auth import logout, authenticate
 
 # Create your views here.
 
@@ -20,38 +19,47 @@ def signup(request):
             if(request.POST['password1']==request.POST['password2']):
                 #register user
                 try:
-                    #print(request.POST)
-                    #print("Obteniendo datos")
                     user=User.objects.create_user(username=request.POST['username'],password=request.POST['password1'])
                     user.save()
-                    # Rederigir a la pagina de las notas
-                    return render(request, 'notas/index.html')
+                    login(request, user) 
+                    return redirect('tablero')
                 except:
-                    return HttpResponse('El usuario ya existe')
-            return HttpResponse('las password no coinciden')
+                     return render(request, 'signup.html', {
+                        'form': UserCreationForm,
+                        "error": 'el nombre de usuario ya existe'
+                    })
+                    
+            return render(request, 'signup.html', {
+                        'form': UserCreationForm,
+                        "error": 'Las contraseñas no coinciden'
+                    })
         
-def login_user(request):
-    if(request.method=='GET'):
-        return render(request, 'login.html', {
-            'form': AuthenticationForm
-        })
-    if(request.method=='POST'):
-        username = request.POST.get('username', '') 
-        password = request.POST['password']
-        if(request.POST['username']=='' or request.POST['password']==''):
-            return HttpResponse('Usuario o contraseña vacios')
-        user = authenticate(username=username, password=password)
-        if user is not None:
-            login(request=request, user=user)
-            template = loader.get_template("notas/index.html")
-            return render(request, 'notas/index.html')
-        else:
-            return HttpResponse('Usuario o contraseña incorrectos')
+def tablero(request):
+        return render(request, 'tablero.html')
 
-
-def logout_user(request):
+def cerrar_sesion(request):
     logout(request)
-    # Redirigir a la pagina de inicio
     return redirect('home')
-        
-        
+
+def iniciar_sesion(request):
+    if request.method == 'GET':
+        return render(request, 'signin.html', {
+          'form': AuthenticationForm
+     })
+    else:
+        user=authenticate(request, username=request.POST['username'], password=request.POST['password'])
+        if user is None:
+            return render(request, 'signin.html',{
+                 'form': AuthenticationForm,
+                 'error': 'Usuario o contraseña incorrectas'
+            })
+        else:
+            login(request,user)
+            return redirect('tablero')
+       
+       
+    
+     
+    
+    
+       

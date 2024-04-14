@@ -1,11 +1,46 @@
-<h1>Sign up</h1>
+{% extends 'base.html' %}
+
+{% block content %}
+<body style="background-color:rgb(88,104,117)">
+    <main class="container" >
+        <div class="row">
+           <div class="col-md-4 offset-md-4 mt-5">
+               <form method="POST" class="card card-body ">
+                <div style="text-align: center;">
+                    <img src="https://cdn-icons-png.flaticon.com/512/3171/3171065.png" width="120" height="120">
+                </div>
+                   <h1 class="text-center">Registrate</h1>
+                    <p class="text-center" style="color: red">{{error}}</p>
+                   
+                   {% csrf_token%}
+                    
+                   <div class="mb-3">
+                       <label for="username">Usuario:</label>
+                       <input type="text" name="username" id="username" class="form-control" 
+                       placeholder="Escribe tu nombre de usuario">
+                   </div>
+       
+                   <div class="mb-3">
+                       <label for="password1">Contraseña:</label>
+                       <input type="password" name="password1" id="password1" class="form-control" 
+                       placeholder="Escribe tu contraseña">
+                   </div>
+       
+                   <div class="mb-3">
+                       <label for="password2">Confrima tu contraseña:</label>
+                       <input type="password" name="password2" id="password2" class="form-control" 
+                       placeholder="Confirma tu contraseña">
+                   </div>
+                   
+                   <button class="btn btn-primary" style="background-color: rgb(110,170,173); border-color:rgb(110,170,173)">
+                       Registrate
+                   </button>
+               </form>
+           </div>
+        </div>
+           
+       </main>
+</body>
 
 
-
-<form method="POST">
-    {% csrf_token%}
-    {{form.as_p}}
-    <button>
-        signup
-    </button>
-</form>
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<body style="background-color:rgb(88,104,117)">
+    <main class="container">
+        <div class="row">
+            <section class="col-md-4 offset-md-4 mt-5">
+                <form action="/signin/" method="POST" class="card card-body">
+                    {% csrf_token %}
+
+                    <div style="text-align: center;">
+                        <img src="https://cdn-icons-png.flaticon.com/512/3171/3171065.png" width="120" height="120">
+                    </div>
+                    
+                    <h1 class="text-center">Iniciar sesion</h1>
+                    <p class="text-center" style="color: red">{{error}}</p>
+                
+                    <div class="mb-3">
+                        <label for="username">Usuario:</label>
+                        <input type="text" name="username" id="username" class="form-control" 
+                        placeholder="Escribe tu nombre de usuario">
+                    </div>
+                
+                    <div class="mb-3">
+                        <label for="password">Contraseña:</label>
+                        <input type="password" name="password" id="password" class="form-control" 
+                        placeholder="Escribe tu contraseña">
+                    </div>
+    
+                    <button class="btn btn-primary" style="background-color: rgb(110,170,173); border-color:rgb(110,170,173)">
+                        Iniciar sesion
+                    </button>
+                
+                </form>
+            </section>
+        </div>
+    </main>
+    
+</body>
+{% endblock %}
