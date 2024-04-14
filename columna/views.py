@@ -1,8 +1,6 @@
-from django.shortcuts import render
-from .models import Columna
 from django.template.loader import render_to_string
 from notas.models import Nota
-from django.http import HttpResponse
+from .models import Columna
 
 # Create your views here.
 def createColumn(request, pk):
@@ -12,8 +10,3 @@ def createColumn(request, pk):
     notas = Nota.objects.filter(columna=columna)
     columna = render_to_string('columna.html', {"columna": columna, "notas": notas}, request=request)
     return columna
-    #return render(request, 'columna.html', 
-     #             {
-      #                "columna": columna,
-       #               "notas" : notas
-        #              })

@@ -14,8 +14,7 @@
         <p><label for="autor">Autor:</label> <input type="text" name="autor" id="autor" value="{{ nota.autor }}"></p>
         <p><input type="submit" value="Guardar"></p>
     </form>
-
-    <!-- Botón para regresar a la lista de notas -->
-    <a href="/notas/">Regresar a la lista de notas</a>
+    <!--Regresar al tablero -->
+    <a href="{% url 'tablero:index' %}">Regresar al tablero</a>
 </body>
 </html>

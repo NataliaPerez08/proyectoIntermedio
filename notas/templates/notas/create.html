@@ -17,9 +17,15 @@
         <label for="color">Color:</label>
         <input type="color" id="color" name="color">
 
+        <label for="columna">Columna:</label>
+        <select name="columna" id="columna">
+            {% for columna in columnas %}
+            <option value="{{columna.id}}">{{columna.titulo}}</option>
+            {% endfor %}
+
         <input type="submit" value="Crear">
     </form>
     <!--Regresar al tablero -->
-    <a href="{% url 'notas:index' %}">Regresar al tablero</a>
+    <a href="{% url 'tablero:index' %}">Regresar al tablero</a>
 </body>
 </html>

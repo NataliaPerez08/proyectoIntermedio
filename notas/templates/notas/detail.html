@@ -11,8 +11,8 @@
     <p><strong>Autor:</strong> {{ nota.autor }}</p>
     <p><strong>Fecha de modificación:</strong> {{ nota.fecha_modificacion }}</p>
 
-    <!-- Botón para regresar a la lista de notas -->
-    <a href="/notas/">Regresar a la lista de notas</a>
+    <!--Regresar al tablero -->
+    <a href="{% url 'tablero:index' %}">Regresar al tablero</a>
 
     <!-- Botón para editar la nota -->
     <a href="/notas/{{ nota.id }}/editar/">Editar</a>

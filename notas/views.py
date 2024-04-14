@@ -55,7 +55,9 @@ def form_editar(request, id_nota):
         raise Http404("La nota no existe")
     if request.method == "POST":
         # Verificar si el usuario que esta editando la nota es el autor
-        if nota.autor != request.user:
+        autor_nota = nota.autor
+        usuario = request.user
+        if str(autor_nota) != str(usuario):
             return HttpResponse("No puedes editar una nota que no es tuya")
         else:
             nota.titulo = request.POST["titulo"]
