@@ -10,8 +10,8 @@
                     <img src="https://cdn-icons-png.flaticon.com/512/3171/3171065.png" width="120" height="120">
                 </div>
                    <h1 class="text-center">Registrate</h1>
-               
-                   {{error}}
+                    <p class="text-center" style="color: red">{{error}}</p>
+                   
                    {% csrf_token%}
                     
                    <div class="mb-3">
@@ -32,7 +32,7 @@
                        placeholder="Confirma tu contraseña">
                    </div>
                    
-                   <button class="btn btn-primary">
+                   <button class="btn btn-primary" style="background-color: rgb(110,170,173); border-color:rgb(110,170,173)">
                        Registrate
                    </button>
                </form>
