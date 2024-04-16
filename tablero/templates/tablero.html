@@ -8,9 +8,38 @@
         body {
             background-color: gray;
         }
+
+        .columnasContainer{
+            width: 80%;
+            height: auto;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            align-items: flex-start;
+        }
+
+        .mainContainer{
+
+            width: 100%;
+            height: auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            gap: 20px;
+        }
     </style>
 </head>
 <body>
-    {{columna | safe}}
+    <div class="mainContainer">
+        <div class="titleContainer">
+            <h1>Hola {{request.user}}</h1>
+        </div>
+        <div class="columnasContainer">
+            {% for columna in columnas %}
+            {{columna | safe}}
+            {% endfor %}
+        </div>
+    </div>
 </body>
 </html>
