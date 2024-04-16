@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Eliminar Nota</title>
+</head>
+
+<body>
+    <h1>Eliminar Nota</h1>
+    <form method="post">
+        {% csrf_token %}
+        <p>¿Estás seguro de que quieres eliminar la nota "{{ nota.titulo }}"?</p>
+        <p><input type="submit" value="Confirmar"></p>
+    </form>
+
+    <!-- Botón para regresar a la lista de notas -->
+    <a href="/notas/">Regresar a la lista de notas</a>
+</body>
+</html>

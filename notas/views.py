@@ -69,3 +69,19 @@ def form_editar(request, id_nota):
         return HttpResponseRedirect(reverse("notas:index"))
     else:
         return render(request, "notas/edit.html", {"nota": nota})
+
+def form_eliminar(request, id_nota):
+    try:
+        nota = Nota.objects.get(pk=id_nota)
+    except Nota.DoesNotExist:
+        raise Http404("La nota no existe")
+    
+    if request.method == "POST":
+        # Verificar si el usuario que está eliminando la nota es el autor
+        if nota.autor != request.user:
+            return HttpResponse("No puedes eliminar una nota que no es tuya")
+        else:
+            nota.delete()  # Elimina la nota
+            return HttpResponseRedirect(reverse("notas:index"))
+    else:
+        return render(request, "notas/eliminar.html", {"nota": nota})
