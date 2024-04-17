@@ -69,7 +69,13 @@ def form_editar(request, id_nota):
             nota.color = request.POST["color"]
             nota.autor = request.POST["autor"]
             nota.fecha_modificacion = datetime.datetime.now()
+            # Busca columna por id
+            columna = Columna.objects.get(pk=request.POST["columna"])
+            nota.columna = columna
             nota.save()
-        return HttpResponseRedirect(reverse("notas:index"))
+        return HttpResponseRedirect(reverse("tablero:index"))
     else:
-        return render(request, "notas/edit.html", {"nota": nota})
+        # Recupera las columnas
+        columnas = Columna.objects.all()
+        # Renderiza el template
+        return render(request, "notas/edit.html", {"nota": nota, "columnas": columnas})
