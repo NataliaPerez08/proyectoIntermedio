@@ -1,5 +1,4 @@
 from django.shortcuts import render
-from django.http import HttpResponse
 from columna.views import createColumn
 from columna.models import Columna
 

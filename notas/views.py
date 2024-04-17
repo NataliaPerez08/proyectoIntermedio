@@ -4,6 +4,7 @@ from django.shortcuts import render
 from django.template import loader
 from django.urls import reverse
 from .models import Nota
+from columna.models import Columna
 
 
 def index(request):
@@ -32,21 +33,24 @@ def form_crear(request):
         contenido = request.POST["contenido"]
         color = request.POST["color"]
         user = request.user 
+        columna = request.POST["columna"]
+        columna = Columna.objects.get(pk=columna)
         # Si esta vacio algun campo aviso al usuario
         if not titulo or not contenido or not color:
             return HttpResponse("Debes completar todos los campos")
 
         # Creo una nueva nota
-        n = Nota(titulo=titulo, contenido=contenido, color=color, autor=user, fecha_modificacion=fecha_actual)
+        n = Nota(titulo=titulo, contenido=contenido, color=color, autor=user, fecha_modificacion=fecha_actual, columna=columna)
         # Guardo la nota
         n.save()
         # Redirijo a la lista de notas
-        return HttpResponseRedirect(reverse("notas:index"))
+        return HttpResponseRedirect(reverse("tablero:index"))
     else:
+        columnas = Columna.objects.all()
         # Cargo el template
         template = loader.get_template("notas/create.html")
         # Renderizo el template
-        return HttpResponse(template.render({}, request))
+        return HttpResponse(template.render({"columnas": columnas}, request))
 
 def form_editar(request, id_nota):
     try:

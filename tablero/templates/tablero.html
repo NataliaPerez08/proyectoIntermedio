@@ -34,6 +34,8 @@
     <div class="mainContainer">
         <div class="titleContainer">
             <h1>Hola {{request.user}}</h1>
+            <!-- Cerrar sesion -->
+            <a href="{% url 'logout' %}">Cerrar Sesion</a>
         </div>
         <div class="columnasContainer">
             {% for columna in columnas %}
@@ -41,5 +43,8 @@
             {% endfor %}
         </div>
     </div>
+    <!-- Crear nota -->
+    <a href="{% url 'notas:crear' %}">Crear Nota</a>
+    
 </body>
 </html>

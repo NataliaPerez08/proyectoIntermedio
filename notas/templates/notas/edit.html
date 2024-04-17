@@ -8,11 +8,26 @@
     <h1>Editar Nota</h1>
     <form method="post">
         {% csrf_token %}
-        <p><label for="titulo">Titulo:</label> <input type="text" name="titulo" id="titulo" value="{{ nota.titulo }}"></p>
-        <p><label for="contenido">Contenido:</label> <textarea name="contenido" id="contenido">{{ nota.contenido }}</textarea></p>
-        <p><label for="color">Color:</label> <input type="color" name="color" id="color" value="{{ nota.color }}"></p>
-        <p><label for="autor">Autor:</label> <input type="text" name="autor" id="autor" value="{{ nota.autor }}"></p>
-        <p><input type="submit" value="Guardar"></p>
+
+        <label for="titulo">Titulo:</label> 
+        <input type="text" name="titulo" id="titulo" value="{{ nota.titulo }}">
+        
+        <label for="contenido">Contenido:</label> 
+        <textarea name="contenido" id="contenido">{{ nota.contenido }}</textarea>
+        
+        <label for="color">Color:</label> 
+        <input type="color" name="color" id="color" value="{{ nota.color }}">
+
+        <label for="autor">Autor:</label> 
+        <input type="text" name="autor" id="autor" value="{{ nota.autor }}">
+
+        <label for="columna">Columna: </label>
+        <select name="columna" id="columna">
+        {% for columna in columnas %}
+            <option value="{{columna.id}}">{{columna.titulo}}</option>
+        {% endfor %}
+
+        <input type="submit" value="Guardar">
     </form>
     <!--Regresar al tablero -->
     <a href="{% url 'tablero:index' %}">Regresar al tablero</a>
