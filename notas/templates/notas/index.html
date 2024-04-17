@@ -1,4 +1,5 @@
-<!DOCTYPE html>
+{% extends 'base.html' %}
+{% comment %} <!DOCTYPE html>
 <html>
 <head>
     <title>Notas</title>
@@ -35,5 +36,14 @@
     {% endif %}
 </body>
 
-</html>
+</html> {% endcomment %}
 
+
+{% block body %}
+<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+    <a href="{% url 'notas:login' %}" class="btn btn-primary me-md-2 button-right" type="button">Login</a>
+    <a href="{% url 'notas:signup' %}" class="btn btn-primary me-md-2 button-right" type="button">Register</a>
+</div>
+{% endblock body %}
+    
+    

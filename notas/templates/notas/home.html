@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% load crispy_forms_tags %}
+{% block body %}
+
+
+    <div class="container">
+        <br>
+        
+        <h1>Notas</h1>
+        <div class="notes">   
+            
+            {% if notas %}
+                {% for nota in notas %}
+                
+                <div class="note">
+                    
+                    <h2 class="text-info">
+                        {{ nota.titulo }}</h2>
+                    <p>{{ nota.contenido }}</p>
+                    
+                    <div class="options">
+                        <a href="/{{ nota.id }}/" class="btn btn-success">Editar</a>
+                        {% comment %} <a href="/delete/{{note.id}}/" class="btn btn-danger">Delete</a> {% endcomment %}
+                    </div>
+                </div>
+                
+                {% endfor %}
+
+            {% else %}
+                <p>No hay notas</p>
+            {% endif %}   
+        </div>
+    </div>
+
+
+
+
+    <div class="dropup">
+        <button class="button-dropup">
+            <img src="{% static 'images/plus-circle.svg' %}" alt="Agregar">
+        </button>
+    
+        <div class="dropup-content">
+            
+            <button class="button-content">
+                <img src="{% static 'images/image-square.svg' %}" alt="Imagen">
+            </button>
+            
+            <button class="button-content" onclick="openModal()">
+                <img src="{% static 'images/note.svg' %}" alt="Nota">
+            </button>
+           
+            <button class="button-content">
+                <img src="{% static 'images/columns-plus-right.svg' %}" alt="Columna">
+            </button>
+        </div>
+    </div> 
+
+    <div class="add-modal" id="add-modal">
+        <div class="form">
+            
+            <form action="" method="post">
+                
+                {% csrf_token %}
+                <h3>Nueva nota</h3>
+                
+                {{ form | crispy }}
+                
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                    <button class="btn btn-danger btn-close " onclick="closeModal()>Cancelar</button>
+                </div>
+                
+            </form>
+        </div>
+    </div> 
+       
+    {% endblock body %}
