@@ -8,7 +8,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <style>
         body{
-            background-color: gray;
+            background-color:rgb(237, 237, 237);
         }
         .flexContainer{
             display: flex;
@@ -19,26 +19,32 @@
         .columnaContainer{
             width: 220px;
             height: auto;
-            background-color: gray;
+            background-color:rgb(237, 237, 237);
         }
         .tituloColumnaContainer{
-            width: 100%;
+            width: 120%;
             height: auto;
             background-color: white;
             flex-grow: 1;
+            border-radius: 5px;
         }
         .listaContainer{
-            width: 100%;
+            width: 120%;
             height: auto;
             background-color: white;
             flex-grow: 6;
             padding: 15px;
+            border-radius: 25px;
         }
 
         .notaContainer{
             width: 100%;
             height: auto;
             background-color: #FFE8DE;
+            border-radius: 25px;
+        }
+        h1{
+            font-size:200%;
         }
     </style>
 </head>
@@ -53,7 +59,9 @@
             <div class="notaContainer">
                 <h2>{{nota.titulo}}</h2>
                 <p>{{nota.contenido}}</p>
-                <a href="{% url 'notas:detail' nota.id %}">Ver detalle</a>
+                <a href="{% url 'notas:detail' nota.id %}">Ver detalles</a>
+                <a href="/notas/{{ nota.id }}/editar/">Editar</a>
+                <a href="/notas/{{ nota.id }}/eliminar/">Eliminar</a>
             </div>
             {% endfor %}
         </div>
