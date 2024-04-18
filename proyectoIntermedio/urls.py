@@ -16,8 +16,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
+from tasks import views
 
 urlpatterns = [
     path('notas/', include('notas.urls')),
+    path('tablero/', include('tablero.urls')),
     path('admin/', admin.site.urls),
+    path('',views.home, name="home"),
+    path('signup/',views.signup, name="signup"),
+    path('tablero/',views.tablero, name="tablero"),
+    path('logout/',views.cerrar_sesion, name="logout"),
+    path('signin/',views.iniciar_sesion, name="signin")
 ]

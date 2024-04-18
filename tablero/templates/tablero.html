@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+         @import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+        body {
+            background-color: rgb(237, 237, 237);
+        }
+
+        .columnasContainer{
+            width: 80%;
+            height: auto;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            align-items: flex-start;
+            font-family: "Rubik", sans-serif;
+            font-optical-sizing: auto;
+            font-weight: 300;
+            font-style: normal;
+            font-size: large;
+        }
+
+        .mainContainer{
+
+            width: 100%;
+            height: auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            gap: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="mainContainer">
+        <div class="titleContainer">
+            <h1>Hola {{request.user}}</h1>
+            <!-- Cerrar sesion -->
+            <a href="{% url 'logout' %}">Cerrar Sesion</a>
+        </div>
+        <div class="columnasContainer">
+            {% for columna in columnas %}
+            {{columna | safe}}
+            {% endfor %}
+        </div>
+    </div>
+    <!-- Crear nota -->
+    <a href="{% url 'notas:crear' %}">Crear Nota</a>
+    
+</body>
+</html>
