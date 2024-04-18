@@ -18,15 +18,22 @@
         }
         .columnaContainer{
             width: 220px;
-            height: auto;
+            /* Estoy intentando que las columans haga*/
+            max-height: 80vh;
             background-color:rgb(237, 237, 237);
+            max-height: 100%
         }
         .tituloColumnaContainer{
             width: 120%;
-            height: auto;
+            height: 20%;
             background-color: white;
             flex-grow: 1;
             border-radius: 5px;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            padding: 5px
         }
         .listaContainer{
             width: 120%;
@@ -35,6 +42,9 @@
             flex-grow: 6;
             padding: 15px;
             border-radius: 25px;
+            max-height: 100%;
+            overflow: scroll;
+            
         }
 
         .notaContainer{
@@ -42,22 +52,43 @@
             height: auto;
             background-color: #FFE8DE;
             border-radius: 25px;
+            text-align: left;
+            padding: 5% 6%;
         }
         h1{
             font-size:200%;
         }
+        
+        .svg{
+            width: 10%;
+            align-self: flex-start
+        }
+
+        .notaTitulo {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+        }
     </style>
 </head>
 <body>
-    <!-- <h1>Hola {{request.user}}</h1> -->
     <div class="columnaContainer flexContainer">
         <div class="tituloColumnaContainer">
             <h1>{{columna.titulo}}</h1>
+            <div class="svg">
+                {% load svg %}
+                {% svg 'threeDots' %}
+            </div>
         </div>
         <div class="listaContainer flexContainer">
             {% for nota in notas%}
-            <div class="notaContainer">
-                <h2>{{nota.titulo}}</h2>
+            <div class="notaContainer" style="background-color: {{ nota.color }};">
+                <div class="notaTitulo">
+                    <h2>{{nota.titulo}}</h2> 
+                    <div class="svg">
+                        {% svg 'threeDots' %}
+                    </div>
+                </div>
                 <p>{{nota.contenido}}</p>
                 <a href="{% url 'notas:detail' nota.id %}">Ver detalles</a>
                 <a href="/notas/{{ nota.id }}/editar/">Editar</a>
