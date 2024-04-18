@@ -82,6 +82,7 @@
             display:flex;
             opacity: 0;
             pointer-events: none;
+            z-index: 10;
         }
         
         .modal__container{
@@ -96,6 +97,7 @@
             gap: 1em;
             place-items: center;
             grid-auto-columns: 100%;
+            z-index: 10;
             
         }
         .modal__title{
@@ -157,7 +159,7 @@
                     </div>
                 </div>
                 
-                    <a class="icono-izq ojo" href=#><img class="icono-ojo" src="https://cdn-icons-png.flaticon.com/512/3722/3722014.png" alt="ojo detalles"></a>
+                    <a class="icono-izq ojo" href="#"><img class="icono-ojo" src="https://cdn-icons-png.flaticon.com/512/3722/3722014.png" alt="ojo detalles"></a>
                     <a class="icono-izq lapiz" href="/notas/{{ nota.id }}/editar/"><img class="icono-lapiz" src="https://cdn-icons-png.flaticon.com/512/5840/5840946.png" alt="lapiz editar"></a>
                     <a class="icono-izq basura" href="/notas/{{ nota.id }}/eliminar/"><img class="icono-basura" src="https://cdn-icons-png.flaticon.com/512/1017/1017530.png" alt="basura eliminar"></a>
                     
