@@ -50,6 +50,26 @@
             border-radius: 10px;
             padding-left: 5px;
         }
+        .icono-ojo{
+            width: 25px;
+            height: 25px;
+            opacity: 70%;
+        }
+        .icono-lapiz{
+            width: 20px;
+            height: 20px;
+            opacity: 70%;
+        }
+        .icono-basura{
+            width: 20px;
+            height: 20px;
+            opacity: 70%;
+        }
+        .icono-izq{
+            float: right;
+            padding-right:10px;
+            opacity: 70%;
+        }
     </style>
 </head>
 <body>
@@ -63,9 +83,9 @@
             <div class="notaContainer" style="background-color: {{ nota.color }};">
                 <h2>{{nota.titulo}}</h2>
                 <p>{{nota.contenido}}</p>
-                <a href="{% url 'notas:detail' nota.id %}">Ver detalle</a>
-                <a href="/notas/{{ nota.id }}/editar/">Editar</a>
-                <a href="/notas/{{ nota.id }}/eliminar/">Eliminar</a>
+                    <a class="icono-izq" href="{% url 'notas:detail' nota.id %}"><img class="icono-ojo" src="https://cdn-icons-png.flaticon.com/512/3722/3722014.png" alt="ojo detalles"></a>
+                    <a class="icono-izq" href="/notas/{{ nota.id }}/editar/"><img class="icono-lapiz" src="https://cdn-icons-png.flaticon.com/512/5840/5840946.png" alt="lapiz editar"></a>
+                    <a class="icono-izq" href="/notas/{{ nota.id }}/eliminar/"><img class="icono-basura" src="https://cdn-icons-png.flaticon.com/512/1017/1017530.png" alt="basura eliminar"></a>
             </div>
             {% endfor %}
         </div>
