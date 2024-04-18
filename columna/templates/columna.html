@@ -72,7 +72,7 @@
             opacity: 70%;
         }
     
-        .modal1{
+        .modal{
             position:fixed;
             top:0;
             left: 0;
@@ -146,8 +146,9 @@
             <div class="notaContainer" style="background-color: {{ nota.color }};">
                 <h2>{{nota.titulo}}</h2>
                 <p>{{nota.contenido}}</p>
-                <!--"{% url 'notas:detail' nota.id %}"-->
-                <div class="modal1">
+                <!--"{% url 'notas:detail' nota.id %}"
+                -->
+                <div class="modal{{ forloop.counter }} modal">
                     <div class="modal__container">
                         <h2 class="modal__title">Detalles de la nota</h2>
                         <p class="modal__paragraph"><strong>Titulo:</strong> {{ nota.titulo }}</p>
@@ -169,9 +170,9 @@
     </div>
 
     <script>
-
+/*
         const openModal= document.querySelector('.ojo');
-        const modal= document.querySelector('.modal1')
+        const modal= document.querySelector('.modal')
         const closeModal= document.querySelector('.modal__close')
 
         openModal.addEventListener('click',(e)=>{
@@ -183,7 +184,33 @@
             e.preventDefault();
             modal.classList.remove('modal--show');
         });
+         closeModal.addEventListener('click',(e)=>{
+            e.preventDefault();
+            modal.classList.remove('modal--show');
+        });
 
+*/
+        const openModal = document.querySelectorAll('.ojo');
+
+        openModal.forEach((btn, index) => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                const modal = document.querySelector('.modal' + (index + 1)); // Asegúrate de usar el índice correcto
+                modal.classList.add('modal--show');
+            });
+        });
+        const closeButtons = document.querySelectorAll('.modal__close');
+
+        closeButtons.forEach((button, index) => {
+        // Agregar un event listener para el evento de clic
+            button.addEventListener('click', (e) => {
+                e.preventDefault();
+                // Seleccionar el modal correspondiente y quitar la clase para ocultarlo
+                const modal = document.querySelector('.modal' + (index + 1));
+                modal.classList.remove('modal--show');
+            });
+        });
+       
         
     </script>
 </body>
