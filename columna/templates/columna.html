@@ -164,7 +164,7 @@
                 <div class="modal-editar{{ nota.pk }}-{{columna.pk}} modal">
                     <div class="modal__container">
                         <h1>Editar Nota</h1>
-                        <form method="post">
+                        <form method="post" action="{% url 'update_nota' nota.id %}">
                             {% csrf_token %}
                     
                             <label for="titulo">Titulo:</label> 
@@ -180,11 +180,11 @@
                             <input type="text" name="autor" id="autor" value="{{ nota.autor }}">
                     
                             <label for="columna">Columna: </label>
-                            <select name="columna" id="columna">
-                            {% for columna in columnas %}
-                                <option value="{{columna.id}}">{{columna.titulo}}</option>
-                            {% endfor %}
-                    
+                            <select name="columna" id="columna" selected="{{nota.columna.id}}">
+                            <option value="1">Por hacer</option>
+                            <option value="2">En progreso</option>
+                            <option value="3">Terminada</option>
+                     
                             <input type="submit" value="Guardar">
                         </form>
                         <a href="#" class="modal__close-editar" data-notaPk="{{nota.pk}}" data-colPk="{{columna.pk}}">Cerrar Modal</a>
@@ -192,7 +192,7 @@
                 </div>
                 
                     <a class="icono-izq ojo" href="{% url 'notas:detail' nota.id %}"><img class="icono-ojo" src="https://cdn-icons-png.flaticon.com/512/3722/3722014.png" alt="ojo detalles" data-notaPk="{{nota.pk}}" data-colPk="{{columna.pk}}"></a>
-                    <a class="icono-izq lapiz" href="/notas/{{ nota.id }}/editar/"><img class="icono-lapiz" src="https://cdn-icons-png.flaticon.com/512/5840/5840946.png" alt="lapiz editar" data-notaPk="{{nota.pk}}" data-colPk="{{columna.pk}}"></a>
+                    <a class="icono-izq lapiz" href="/notas/{{ nota.id }}/editar/"><img class="icono-lapiz" src="https://cdn-icons-png.flaticon.com/512/5840/5840946.png" alt="lapiz editar" data-notaPk="{{nota.pk}}" data-colPk="{{columna.pk}}" data-aut="{{nota.autor}}"></a>
                     <a class="icono-izq basura" href="/notas/{{ nota.id }}/eliminar/"><img class="icono-basura" src="https://cdn-icons-png.flaticon.com/512/1017/1017530.png" alt="basura eliminar"></a>
                     
             </div>

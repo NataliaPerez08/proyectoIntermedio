@@ -26,5 +26,6 @@ urlpatterns = [
     path('signup/',views.signup, name="signup"),
     path('tablero/',views.tablero, name="tablero"),
     path('logout/',views.cerrar_sesion, name="logout"),
-    path('signin/',views.iniciar_sesion, name="signin")
+    path('signin/',views.iniciar_sesion, name="signin"),
+    path('columna/', include('columna.urls'))
 ]
