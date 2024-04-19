@@ -1,13 +1,57 @@
 {% extends 'base.html' %}
 
-{% block content%}
+{% block content %}
+<style>
+    main.container {
+        background-color: #EDEDED; /* Cambia el color de fondo para el contenedor principal */
+    }
+    .jumbotron h1 {
+        color: #586875; /* Establece el color del texto */
+        font-weight: 400; /*Hace la fuente más gruesa */
+    }
+    .btn-outline-info {
+            color: #586875; /* Cambia el color del texto */
+            background-color: #A5C8CA; /* Cambia el color de fondo */
+            border-color: #A5C8CA; /* Cambia el color del borde */
+        }
 
+        .btn-outline-info:hover {
+            color: #586875; /* Cambia el color del texto al pasar el mouse */
+            background-color: #88A7A8; /* Cambia el fondo al pasar el mouse */
+            border-color: #88A7A8; /* Cambia el borde al pasar el mouse */
+        }
+        .btn-outline-info:active {
+            color: #586875; /* Cambia el color del texto al pasar el mouse */
+            background-color: #88A7A8; /* Cambia el fondo al pasar el mouse */
+            border-color: #88A7A8; /* Cambia el borde al pasar el mouse */
+        }
+        .btn-outline-primary{
+            color: #ffff; /* Cambia el color del texto */
+            background-color: #6EAAAD; /* Cambia el color de fondo */
+            border-color: #6EAAAD; /* Cambia el color del borde */
+        }
+        .btn-outline-primary:hover {
+            color: #ffff; /* Cambia el color del texto al pasar el mouse */
+            background-color: #62898B; /* Cambia el fondo al pasar el mouse */
+            border-color: #62898B; /* Cambia el borde al pasar el mouse */
+        }
+        .btn-outline-primary:active {
+            color: #ffff; /* Cambia el color del texto al pasar el mouse */
+            background-color: #62898B; /* Cambia el fondo al pasar el mouse */
+            border-color: #62898B; /* Cambia el borde al pasar el mouse */
+        }
+</style>
 <main class="container py-5">
-    <section class="card card-body">
-        <h1 class="display-1 text-center">Nombre del tablero xd</h1>
-        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Culpa eaque quam voluptas, facilis ipsa labore ut inventore,
-            aspernatur nam accusamus reiciendis velit? Laudantium tempora ad facilis alias delectus at. Aspernatur voluptates impedit maiores doloremque aliquid, libero quisquam excepturi facere fugit dolorem sunt nostrum quibusdam accusantium saepe iure. Nobis obcaecati quo rem, eos repudiandae delectus rerum fugit iure id dolorum, saepe unde sint hic fuga accusamus totam sit dolorem error non! Ducimus veritatis minus vitae nostrum modi nobis atque corrupti ex culpa obcaecati delectus nihil cumque porro dolorum veniam ea quibusdam, ab nesciunt dicta incidunt numquam voluptatum ad adipisci. Illum, perspiciatis.</p>
-    </section>
+    <div class="jumbotron">
+        <h1 style="color: #586875" class="display-1">Bienvenido/a a <strong>Kantadi</strong></h1>
+        <!-- <h2 style="color: #586875" class="display-3">Bienvenido/a</h2> -->
+        <p style="color: #586875"  class="display-6">Planea en equipo tus tareas, trabajos, <br>y proyectos!</p>
+        <hr class="my-4 ">
+        <p style="color: #586875"  class="display-7">Trabaja con tu equipo, o sólo tú...</p>
+        <p class="lead">
+          <a class="btn btn-outline-primary" href="/signup" role="button">¡Regístrate gratis!</a>
+        </p>
+      </div>
     
 </main>
 {% endblock %}
