@@ -1,7 +1,8 @@
 from django.template.loader import render_to_string
 from notas.models import Nota
 from .models import Columna
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
+from django.urls import reverse
 
 # Create your views here.
 def createColumn(request, pk):
@@ -17,8 +18,8 @@ def update_nota(request, nota_id):
         # Get the Nota object to update
         nota = Nota.objects.get(pk=nota_id)
 
-        if(nota.autor != request.user):
-            return HttpResponse("No puedes editar esta nota", status=403)
+        if(nota.autor != request.user.username):
+            return HttpResponse("No puedes editar una nota que no es tuya" , status=403)
         
         # Update the object with the new values from the form
         nota.titulo = request.POST.get('titulo')
@@ -29,4 +30,4 @@ def update_nota(request, nota_id):
         
         # Save the updated object
         nota.save()
-    return HttpResponse("Nota editada de manera exitosa", status=200)
+    return HttpResponseRedirect(reverse("tablero:index"))
