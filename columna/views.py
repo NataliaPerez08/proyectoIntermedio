@@ -9,4 +9,4 @@ def createColumn(request, pk):
     # Obtenemos las notas que pertenecen a esa columna
     notas = Nota.objects.filter(columna=columna)
     columna = render_to_string('columna.html', {"columna": columna, "notas": notas}, request=request)
-    return columna
+    return columna 

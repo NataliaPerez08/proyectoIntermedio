@@ -5,6 +5,7 @@ from django.template import loader
 from django.urls import reverse
 from .models import Nota
 from columna.models import Columna
+from django.template.loader import render_to_string
 
 
 def index(request):

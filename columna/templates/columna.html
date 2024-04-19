@@ -147,8 +147,9 @@
                 <h2>{{nota.titulo}}</h2>
                 <p>{{nota.contenido}}</p>
                 <!--"{% url 'notas:detail' nota.id %}"
+                    {{ forloop.counter }}{{ forloop.parentloop.counter }}
                 -->
-                <div class="modal{{ forloop.counter }}{{ forloop.parentloop.counter }} modal">
+                <div class="modal{{ nota.pk }}-{{columna.pk}} modal">
                     <div class="modal__container">
                         <h2 class="modal__title">Detalles de la nota</h2>
                         <p class="modal__paragraph"><strong>Titulo:</strong> {{ nota.titulo }}</p>
@@ -156,12 +157,12 @@
                         <p class="modal__paragraph"><strong>Color:</strong> {{ nota.color }}</p>
                         <p class="modal__paragraph"><strong>Autor:</strong> {{ nota.autor }}</p>
                         <p class="modal__paragraph"><strong>Fecha de modificación:</strong> {{ nota.fecha_modificacion }}</p>
-                        <p>{{ forloop.counter }}{{ forloop.parentloop.counter }}</p>
-                        <a href="#" class="modal__close">Cerrar Modal</a>
+                        <p>{{ nota.pk }}</p>
+                        <a href="#" class="modal__close" data-notaPk="{{nota.pk}}" data-colPk="{{columna.pk}}">Cerrar Modal</a>
                     </div>
                 </div>
                 
-                    <a class="icono-izq ojo" href="{% url 'notas:detail' nota.id %}"><img class="icono-ojo" src="https://cdn-icons-png.flaticon.com/512/3722/3722014.png" alt="ojo detalles"></a>
+                    <a class="icono-izq ojo" href="{% url 'notas:detail' nota.id %}"><img class="icono-ojo" src="https://cdn-icons-png.flaticon.com/512/3722/3722014.png" alt="ojo detalles" data-notaPk="{{nota.pk}}" data-colPk="{{columna.pk}}"></a>
                     <a class="icono-izq lapiz" href="/notas/{{ nota.id }}/editar/"><img class="icono-lapiz" src="https://cdn-icons-png.flaticon.com/512/5840/5840946.png" alt="lapiz editar"></a>
                     <a class="icono-izq basura" href="/notas/{{ nota.id }}/eliminar/"><img class="icono-basura" src="https://cdn-icons-png.flaticon.com/512/1017/1017530.png" alt="basura eliminar"></a>
                     
@@ -170,49 +171,6 @@
         </div>
     </div>
 
-    <script>
-/*
-        const openModal= document.querySelector('.ojo');
-        const modal= document.querySelector('.modal')
-        const closeModal= document.querySelector('.modal__close')
-
-        openModal.addEventListener('click',(e)=>{
-            e.preventDefault();
-            modal.classList.add('modal--show');
-        
-        });
-        closeModal.addEventListener('click',(e)=>{
-            e.preventDefault();
-            modal.classList.remove('modal--show');
-        });
-         closeModal.addEventListener('click',(e)=>{
-            e.preventDefault();
-            modal.classList.remove('modal--show');
-        });
-
-*/
-        const openModal = document.querySelectorAll('.ojo');
-
-        openModal.forEach((btn, index) => {
-            btn.addEventListener('click', (e) => {
-                e.preventDefault();
-                const modal = document.querySelector('.modal' + (index + 1)); // Asegúrate de usar el índice correcto
-                modal.classList.add('modal--show');
-            });
-        });
-        const closeButtons = document.querySelectorAll('.modal__close');
-
-        closeButtons.forEach((button, index) => {
-        // Agregar un event listener para el evento de clic
-        button.addEventListener('click', (e) => {
-            e.preventDefault();
-            // Seleccionar el modal correspondiente y quitar la clase para ocultarlo
-            const modal = document.querySelector('.modal' + (index + 1));
-            modal.classList.remove('modal--show');
-        });
-    });
-       
-        
-    </script>
+    
 </body>
 </html>
