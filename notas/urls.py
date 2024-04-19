@@ -10,4 +10,6 @@ urlpatterns = [
     path("crear/", views.form_crear, name="crear"),
     # ex: /notas/5/editar/
     path("<int:id_nota>/editar/", views.form_editar, name="editar"),
+    # ex: /notas/5/eliminar/
+    path("<int:id_nota>/eliminar/", views.form_eliminar, name="eliminar"),
 ]

@@ -80,3 +80,21 @@ def form_editar(request, id_nota):
         columnas = Columna.objects.all()
         # Renderiza el template
         return render(request, "notas/edit.html", {"nota": nota, "columnas": columnas})
+
+def form_eliminar(request, id_nota):
+    try:
+        nota = Nota.objects.get(pk=id_nota)
+    except Nota.DoesNotExist:
+        raise Http404("La nota no existe")
+    if request.method == "POST":
+        # Verificar si el usuario que esta editando la nota es el autor
+        autor_nota = nota.autor
+        usuario = request.user
+        if str(autor_nota) != str(usuario):
+            return HttpResponse("No puedes eliminar una nota que no es tuya")
+        else:
+            nota.delete()
+        return HttpResponseRedirect(reverse("tablero:index"))
+    else:
+        return render(request, "notas/eliminar.html", {"nota": nota})
+    
