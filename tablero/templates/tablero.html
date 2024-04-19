@@ -74,6 +74,7 @@
         
         */
                 const openModal = document.querySelectorAll('.ojo');
+                const openModalLapiz = document.querySelectorAll('.lapiz');
         
                 openModal.forEach((btn, index) => {
                     btn.addEventListener('click', (e) => {
@@ -84,7 +85,17 @@
                         modal.classList.add('modal--show');
                     });
                 });
+                openModalLapiz.forEach((btn, index) => {
+                    btn.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        const notaPk = e.target.getAttribute("data-notaPk")
+                        const colPk = e.target.getAttribute("data-colPk")
+                        const modal = document.querySelector('.modal-editar' + notaPk + "-" + colPk); // Asegúrate de usar el índice correcto
+                        modal.classList.add('modal--show');
+                    });
+                });
                 const closeButtons = document.querySelectorAll('.modal__close');
+                const closeButtonsLapiz = document.querySelectorAll('.modal__close-editar');
         
                 closeButtons.forEach((button, index) => {
                 // Agregar un event listener para el evento de clic
@@ -94,6 +105,18 @@
                     const notaPk = e.target.getAttribute("data-notaPk")
                     const colPk = e.target.getAttribute("data-colPk")
                     const modal = document.querySelector('.modal' + notaPk + "-" + colPk);
+                    modal.classList.remove('modal--show');
+                });
+            });
+
+            closeButtonsLapiz.forEach((button, index) => {
+                // Agregar un event listener para el evento de clic
+                button.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    // Seleccionar el modal correspondiente y quitar la clase para ocultarlo
+                    const notaPk = e.target.getAttribute("data-notaPk")
+                    const colPk = e.target.getAttribute("data-colPk")
+                    const modal = document.querySelector('.modal-editar' + notaPk + "-" + colPk);
                     modal.classList.remove('modal--show');
                 });
             });
