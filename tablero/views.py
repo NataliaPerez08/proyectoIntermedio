@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from columna.views import createColumn
 from columna.models import Columna
+from notas.models import Nota
 
 # Create your views here.
 def index(request):
