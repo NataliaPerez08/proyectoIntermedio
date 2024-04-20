@@ -1,0 +1,91 @@
+
+.dropup {
+    position: fixed;
+    display: inline-block;
+}
+
+.button-dropup {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    background-color: #A5C8CA;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    position: inherit;
+    bottom: 0;
+    left: 0;
+    margin: 20px
+}
+
+.dropup-content {
+    position: fixed;
+    display: none;
+    bottom: 80px;
+    left: 0;
+    background-color: transparent; 
+    border: none; 
+    z-index: 1;
+  }
+
+.button-content {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    background-color: #A5C8CA;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin: 20px;
+    display: block;
+}
+
+.dropup:hover .dropup-content {
+    display: block;
+}
+
+.add-modal{
+    position: fixed;
+    width: 150%;
+    height: 150vh;
+    top: 90%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /* background-color: rgba(0, 0, 0, 0.431); */
+    
+    display: none;
+    z-index: 200;
+}
+
+.form {
+    margin: auto;
+    padding: 60px;
+    background-color: white;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+}
+
+.close-btn {
+    float: right;
+}
+
+.save-btn {
+    float: right;
+    bottom: 50%;
+}
+
+.select-column {
+    width: 50%;
+}
+
+.select-color {
+    width: 20%;;
+}
+
+.asteriskField {
+    display: none;
+}

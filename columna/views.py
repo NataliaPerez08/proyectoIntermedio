@@ -1,10 +1,12 @@
+import datetime
+from unittest import loader
+from django.shortcuts import redirect, render
 from django.template.loader import render_to_string
+from django.urls import reverse
 from notas.models import Nota
 from .models import Columna
 from django.http import HttpResponse, HttpResponseRedirect
-from django.urls import reverse
-from django.shortcuts import redirect
-from django.shortcuts import render
+
 # Create your views here.
 def createColumn(request, pk):
     # Obtenemos la columna que vamos a mostrar
@@ -53,3 +55,41 @@ def form_eliminar(request, nota_id):
     else:
         return render(request, "notas/eliminar.html", {"nota": nota})
     
+
+
+
+def crear_nota(request):
+   
+    if request.method == "POST":
+     
+        fecha_actual = datetime.datetime.now() 
+        
+     
+        titulo    = request.POST["titulo"]
+        contenido = request.POST["contenido"]
+        color     = request.POST["color"]
+        user      = request.user 
+        columna   = request.POST["columna"]
+        columna   = Columna.objects.get(pk=columna)
+       
+        if not titulo or not contenido or not color:
+            return HttpResponse("Debes completar todos los campos")
+
+        n = Nota(titulo=titulo, contenido=contenido, color=color, autor=user, fecha_modificacion=fecha_actual, columna=columna)
+        n.save()
+        
+        # return HttpResponse("La nota ha sido guardada", status=200)
+        
+        columnas = Columna.objects.all()
+        
+        contexto = {
+            "columnas": columnas
+        }
+        
+        return  HttpResponseRedirect(reverse("tablero:index"))
+    
+    # else:
+    #     columnas = Columna.objects.all()
+    #     template = loader.get_template("columna/columna.html")
+     
+    #     return HttpResponse(template.render({"columnas": columnas}, request))
