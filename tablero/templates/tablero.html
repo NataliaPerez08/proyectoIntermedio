@@ -1,5 +1,5 @@
 
-{% block content %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -55,17 +55,12 @@
             margin-right: 50px; /* Aumenta el margen a la derecha del botón Inicio */
         }
         /* Estilos personalizados para los botones */
-        .btn-outline-info {
+        .btn.btn-info {
             color: #586875; /* Cambia el color del texto */
             background-color: #A5C8CA; /* Cambia el color de fondo */
             border-color: #A5C8CA; /* Cambia el color del borde */
         }
-        .btn-outline-info {
-            color: #586875; /* Cambia el color del texto */
-            background-color: #A5C8CA; /* Cambia el color de fondo */
-            border-color: #A5C8CA; /* Cambia el color del borde */
-        }
-        .btn-outline-info:hover {
+        .btn.btn-info:hover {
             color: #586875; /* Cambia el color del texto al pasar el mouse */
             background-color: #88A7A8; /* Cambia el fondo al pasar el mouse */
             border-color: #88A7A8; /* Cambia el borde al pasar el mouse */
@@ -88,7 +83,9 @@
           <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                    <a href="/logout" class="btn btn-outline-info">Cerrar sesion</a>
+                    
+                    <a href="/logout" class="btn btn-info">Cerrar sesión</a>
+              
                 </li>
             </ul>
           </div>
@@ -100,6 +97,7 @@
             {% endfor %}
         </div>
     </div>
+    
     <!-- Crear nota -->
     <a href="{% url 'notas:crear' %}">Crear Nota</a>
     <script>
@@ -125,7 +123,8 @@
         */
                 const openModal = document.querySelectorAll('.ojo');
                 const openModalLapiz = document.querySelectorAll('.lapiz');
-        
+                const openModalBasura= document.querySelectorAll('.basura');
+
                 openModal.forEach((btn, index) => {
                     btn.addEventListener('click', (e) => {
                         e.preventDefault();
@@ -144,9 +143,20 @@
                         modal.classList.add('modal--show');
                     });
                 });
+                openModalBasura.forEach((btn, index) => {
+                    btn.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        const notaPk = e.target.getAttribute("data-notaPk")
+                        const colPk = e.target.getAttribute("data-colPk")
+                        const modal = document.querySelector('.modal-basura' + notaPk + "-" + colPk); // Asegúrate de usar el índice correcto
+                        modal.classList.add('modal--show');
+                    });
+                });
+
                 const closeButtons = document.querySelectorAll('.modal__close');
                 const closeButtonsLapiz = document.querySelectorAll('.modal__close-editar');
-        
+                const closeButtonsBasura = document.querySelectorAll('.modal__close-basura');
+
                 closeButtons.forEach((button, index) => {
                 // Agregar un event listener para el evento de clic
                 button.addEventListener('click', (e) => {
@@ -170,7 +180,30 @@
                     modal.classList.remove('modal--show');
                 });
             });
-               
+
+            closeButtonsBasura.forEach((button, index) => {
+                // Agregar un event listener para el evento de clic
+                button.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    // Seleccionar el modal correspondiente y quitar la clase para ocultarlo
+                    const notaPk = e.target.getAttribute("data-notaPk")
+                    const colPk = e.target.getAttribute("data-colPk")
+                    const modal = document.querySelector('.modal-basura' + notaPk + "-" + colPk);
+                    modal.classList.remove('modal--show');
+                });
+            });
+
+
+            document.addEventListener("DOMContentLoaded", function() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const error = urlParams.get('error');
+    if (error === 'not_owner') {
+        alert('No puedes editar una nota que no es tuya');
+    }
+    if (error === 'eliminar') {
+        alert('No puedes eliminar una nota que no es tuya');
+    }
+}); 
                 
             </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
@@ -178,4 +211,5 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
 </body>
 </html>
-{% endblock %}
+{% block content %}
+    {% endblock %}

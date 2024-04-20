@@ -3,7 +3,8 @@ from notas.models import Nota
 from .models import Columna
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
-
+from django.shortcuts import redirect
+from django.shortcuts import render
 # Create your views here.
 def createColumn(request, pk):
     # Obtenemos la columna que vamos a mostrar
@@ -19,7 +20,8 @@ def update_nota(request, nota_id):
         nota = Nota.objects.get(pk=nota_id)
 
         if(nota.autor != request.user.username):
-            return HttpResponse("No puedes editar una nota que no es tuya" , status=403)
+            url = reverse('tablero:index') + '?error=not_owner'
+            return redirect(url)
         
         # Update the object with the new values from the form
         nota.titulo = request.POST.get('titulo')
@@ -31,3 +33,23 @@ def update_nota(request, nota_id):
         # Save the updated object
         nota.save()
     return HttpResponseRedirect(reverse("tablero:index"))
+
+def form_eliminar(request, nota_id):
+    try:
+        nota = Nota.objects.get(pk=nota_id)
+    except Nota.DoesNotExist:
+        raise Http404("La nota no existe")
+    if request.method == "POST":
+        # Verificar si el usuario que esta editando la nota es el autor
+        autor_nota = nota.autor
+        usuario = request.user
+        if str(autor_nota) != str(usuario):
+            url = reverse('tablero:index') + '?error=eliminar'
+            return redirect(url)
+        
+        else:
+            nota.delete()
+        return HttpResponseRedirect(reverse("tablero:index"))
+    else:
+        return render(request, "notas/eliminar.html", {"nota": nota})
+    
