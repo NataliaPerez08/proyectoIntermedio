@@ -8,7 +8,8 @@ from django.contrib.auth import logout, authenticate
 
 def home(request):
     return render(request, 'home.html')
-
+def signin(request):
+    return render(request, 'signin.html')
 
 def signup(request):
         if(request.method=='GET'):
@@ -22,7 +23,7 @@ def signup(request):
                     user=User.objects.create_user(username=request.POST['username'],password=request.POST['password1'])
                     user.save()
                     login(request, user) 
-                    return redirect('tablero')
+                    return redirect('signin')
                 except:
                      return render(request, 'signup.html', {
                         'form': UserCreationForm,
